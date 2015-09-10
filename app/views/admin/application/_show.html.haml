@@ -10,12 +10,16 @@
           type = column.present? ? column.type : :association
 
           field_partial = "show_#{controller.resource_name}_#{col}"
+          col_partial = "show_#{col}_field"
           type_partial = "show_#{type}_field"
+
 
         - if partial_exist?(field_partial)
           = render partial: field_partial, locals: { value: out, type: type, column: col }
+        - elsif partial_exist?(col_partial)
+          = render partial: col_partial, locals: { value: out, type: type, column: col }
         - elsif partial_exist?(type_partial)
-          = render partial: type_partial, locals: { value: out, type: type, column: col }        
+          = render partial: type_partial, locals: { value: out, type: type, column: col }
         - else
           %strong= "models.fields.#{controller.resource_name.singularize}.#{col}".tc
           = out.respond_to?(:to_sentence) ? out.select(&:present?).to_sentence : out

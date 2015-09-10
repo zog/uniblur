@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root to: 'home#index'
 
     resources :users
+    resources :pictures
 
     resources :signed_urls, only: :index
   end
