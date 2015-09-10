@@ -1,0 +1,11 @@
+- pill [:new, :picture], class: 'btn-success' do
+  = icon(:plus)
+  %span.text= 'actions.create'.t
+
+= pills
+
+.row
+  - @pictures.each do |p|
+    .col-md-4.picture
+      = image_tag p.image.small
+      .name= p.name

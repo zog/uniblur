@@ -1,0 +1,13 @@
+fr:
+  collections: &collections
+    users: Utilisateurs
+    pictures: Photos
+
+  models: &models
+    <<: *collections
+
+    user: Utilisateur
+    picture: Photo
+  admin:
+    collections: *collections
+    models: *models

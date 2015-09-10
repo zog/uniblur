@@ -1,0 +1,7 @@
+%strong= "models.fields.#{controller.resource_name.singularize}.#{column}".tc
+- if value.present?
+  - if value.respond_to?(:thumb)
+    =link_to value.url, target: '_blank' do
+      = image_tag value.thumb
+  - else
+    = image_tag value

@@ -1,0 +1,15 @@
+.row
+  .col-md-12
+    = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+      %fieldset.inputs.panel-body
+        = inputs_for resource, f
+        = f.input :image_data, as: :hidden
+
+      = default_actions
+
+    = render 'direct_download'
+
+- content_for(:scripts) do
+  :coffee
+    $ ->
+      new PictureUploader("form#new_picture")
