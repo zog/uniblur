@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Boilerplate
+module Uniblur
   class Application < Rails::Application
 
     config.generators do |g|
@@ -31,5 +31,17 @@ module Boilerplate
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :fr
+    if ENV["SLACK_WEBHOOK_URL"].present?
+      Rails.application.config.middleware.use ExceptionNotification::Rack,
+        :slack => {
+          :webhook_url => ENV["SLACK_WEBHOOK_URL"],
+          :channel => "#exceptions",
+          :additional_parameters => {
+            icon_url: "https://f1.bcbits.com/img/a0717730333_10.jpg",
+            mrkdwn: true,
+            username: "UNIBLUR-#{Rails.env}"
+          }
+        }
+    end
   end
 end

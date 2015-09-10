@@ -1,6 +1,6 @@
 fr:
-  app_name: 'Boilerplate'
-  admin_app_name: 'Boilerplate Admin'
+  app_name: 'Uniblur'
+  admin_app_name: 'Uniblur Admin'
   no_data: 'Pas encore de données, cliquer sur Nouveau pour démarrer'
   no_data_no_creation: 'Aucune données.'
   welcome: 'Bienvenue %{user}'
