@@ -1,11 +1,8 @@
 class window.PictureUploader
   constructor: (el)->
     @el = $(el)
-    console.log @el
     @imgUrlField = @el.find('[name="picture[remote_image_url]"]')
-    console.log @imgUrlField
     @imgUrlField.change =>
-      console.log 'change'
       @updateImage()
 
     # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F80258f01-85d1-44ec-84aa-16d9fd862c9e%2Fzog.jpg').trigger 'change'
@@ -26,6 +23,7 @@ class window.PictureUploader
 
       return false if @errors
       @stage.removeChild @cursor
+      @stage.update()
       @el.find('[name*=image_data]').val @stage.toDataURL()
       @el.find('[name*=remote_image_url]').remove()
 
