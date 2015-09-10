@@ -21,7 +21,6 @@
     = stylesheet_link_tag 'application', media: 'all'
     = yield :styles
     = javascript_include_tag 'critical'
-    = javascript_include_tag 'http://zurb.com/playground/uploads/upload/upload/330/stackblur.min.js'
     = csrf_meta_tags
 
   - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
