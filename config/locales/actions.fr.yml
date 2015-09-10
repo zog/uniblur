@@ -44,6 +44,7 @@ fr:
     feature: Activer
     unfeature: Désactiver
     browse: Parcourir
+    reset: Recommencer
 
   admin:
     actions: *actions

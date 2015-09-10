@@ -2,6 +2,10 @@ class window.PictureUploader
   constructor: (el)->
     @el = $(el)
     @imgUrlField = @el.find('[name="picture[remote_image_url]"]')
+    @resetBt = @el.find(".btn.reset")
+    @resetBt.click =>
+      @reset()
+    @resetBt.hide()
     @imgUrlField.change =>
       @updateImage()
 
@@ -68,10 +72,6 @@ class window.PictureUploader
     @bitmap.scaleX = @blur.scaleX = $img.width() / @originalWidth
     @bitmap.scaleY = @blur.scaleY = $img.height() / @originalHeight
 
-    console.log $img.width()
-    console.log @bitmap
-    console.log @bitmap.scaleX
-
     @stage.addChild(@bitmap, @blur)
     @drawingCanvas = new createjs.Shape()
     # $img.remove()
@@ -107,6 +107,13 @@ class window.PictureUploader
     @img.crossOrigin = "Anonymous"
     @img.onload = @handleComplete
     @img.src = @imgUrlField.val()
+
+  reset: =>
+    @stage.removeChild @drawingCanvas
+    @drawingCanvas = new createjs.Shape()
+    @stage.addChild @drawingCanvas
+    @updateCacheImage(false)
+    @resetBt.hide()
 
   handleMouseDown: (event)=>
     @oldPt = new createjs.Point(@stage.mouseX / @bitmap.scaleX, @stage.mouseY / @bitmap.scaleY)
@@ -144,6 +151,7 @@ class window.PictureUploader
     #   @updateCacheImage(true)
 
   handleMouseUp: (event)=>
+    @resetBt.show()
     @updateCacheImage(true)
     @isDrawing = false
     @stage.removeChild @drawingCanvasTmp

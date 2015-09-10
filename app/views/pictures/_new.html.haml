@@ -4,6 +4,10 @@
       %fieldset.inputs.panel-body
         = inputs_for resource, f
         = f.input :image_data, as: :hidden
+      .toolbar
+        %a.btn.btn-primary.reset{href: '#'}
+          = icon(:refresh)
+          %span.text= 'actions.reset'.t
 
       = default_actions
 
