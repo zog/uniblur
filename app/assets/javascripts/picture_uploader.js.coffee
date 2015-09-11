@@ -63,7 +63,6 @@ class window.PictureUploader
         console.log "error"
         console.log e
       success: =>
-        console.log "success"
         @workshop.addClass('done')
 
   addErrors: (f)->
@@ -126,7 +125,7 @@ class window.PictureUploader
     else
       @drawingCanvas.cache 0, 0, @originalWidth, @originalHeight
 
-    blurFilter = new createjs.BlurFilter(24, 24, 2)
+    blurFilter = new createjs.BlurFilter(@originalWidth/20, @originalWidth/20, 2)
     # blurFilter = new createjs.ColorFilter(0,0,0,1, 0,0,255,0)
     maskFilter = new createjs.AlphaMaskFilter(@drawingCanvas.cacheCanvas)
     @blur.filters = [blurFilter, maskFilter];
@@ -158,6 +157,7 @@ class window.PictureUploader
     @oldPt = new createjs.Point(@stage.mouseX / @bitmap.scaleX, @stage.mouseY / @bitmap.scaleY)
     @oldMidPt = @oldPt
     @isDrawing = true
+    @stage.removeChild(@drawingCanvasTmp) if @drawingCanvasTmp?
     @drawingCanvasTmp = new createjs.Shape()
     @drawingCanvasTmp.scaleX = @bitmap.scaleX
     @drawingCanvasTmp.scaleY = @bitmap.scaleY
@@ -165,6 +165,7 @@ class window.PictureUploader
     @stage.addChild(@drawingCanvasTmp)
 
   handleMouseMove: (event)=>
+    console.log "handleMouseMove"
     @cursor.x = @stage.mouseX
     @cursor.y = @stage.mouseY
     if (!@isDrawing)
@@ -190,6 +191,7 @@ class window.PictureUploader
     #   @updateCacheImage(true)
 
   handleMouseUp: (event)=>
+    console.log "handleMouseUp"
     @resetBt.show()
     @updateCacheImage(true)
     @isDrawing = false

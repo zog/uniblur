@@ -94,7 +94,6 @@ widgets.define 'filepicker', (element, options) ->
 
         # Update the real input in the other form
         hidden.val(url)
-        console.log hidden
         hidden.trigger("change")
 
         preview.find('img').remove()
