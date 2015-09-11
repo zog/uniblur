@@ -167,6 +167,8 @@ header
           box-shadow: none
         .placeholder
           display: none
+
+
 .workshop-thanks
   width: 50%
   margin: 0 auto
@@ -184,17 +186,12 @@ footer
       color: black
 
 
-@media only screen and (max-width: 767px)
-  .form-container
-    flex-direction: column
-    .main-image,.content
-      flex: 1
-@media only screen and (max-width: 999px)
-  .workshop
-    flex-direction: column-reverse
-    .workshop-form-container,.workshop-working-container
-      flex: 1
-      padding-left: 10%
-      padding-right: 10%
-    .workshop-working-container
-      margin-bottom: 60px
++upto-tablet
+  .workshop .workshop-form-container form
+    .left
+      margin-bottom: 50px
+    .left, .right
+      width: 100%
+
+
+

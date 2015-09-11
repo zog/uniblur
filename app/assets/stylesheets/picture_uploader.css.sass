@@ -1,7 +1,16 @@
+@keyframes pulse
+  0%
+    +transform(scale(1))
+  50%
+    +transform(scale(0.95))
+  100%
+    +transform(scale(1))
+
 .workzone
   +relative
   canvas
     +absolute(0,0,0,0)
   .loader
     height: 400px
+    +animation(pulse 1s infinite ease-in-out)
 
