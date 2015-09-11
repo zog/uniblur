@@ -82,16 +82,20 @@ header
   overflow: hidden
 
   .inner
-    width: 200%
+    width: 300%
     overflow: hidden
     +transition(transform 0.3s)
     +transform(translateX(0%))
   &.active
     min-height: 700px
     .inner
-      +transform(translateX(-50%))
+      +transform(translateX(-33.33%))
+  &.done
+    min-height: 700px
+    .inner
+      +transform(translateX(-66.66%))
   .item
-    width: 50%
+    width: 33.33%
     float: left
   .workshop-placeholder img
     margin: 0 auto

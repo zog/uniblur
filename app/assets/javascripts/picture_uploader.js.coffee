@@ -4,9 +4,11 @@ class window.PictureUploader
     @workshop = $(".workshop")
     @startBt = $('#start')
     @imgUrlField = @el.find('[name="picture[remote_image_url]"]')
-    @resetBt = @el.find(".btn.reset")
+    @resetBt = @el.find(".reset")
     @resetBt.click =>
       @reset()
+    @submitBt = @el.find('input[type=submit]')
+    @submitBt.hide()
     @resetBt.hide()
     @imgUrlField.change =>
       @updateImage()
@@ -41,9 +43,28 @@ class window.PictureUploader
       @stage.update()
       @el.find('[name*=image_data]').val @stage.toDataURL()
       @el.find('[name*=remote_image_url]').remove()
+      @submit()
+      false
     # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F80258f01-85d1-44ec-84aa-16d9fd862c9e%2Fzog.jpg').trigger 'change'
     # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F8f1d7e98-4ac9-4413-a35a-218ca959f504%2Fmasque_affiche_portrait.jpg').trigger 'change'
     # @startBt.click()
+
+  submit: =>
+    data = {}
+    for input in @el.find("input")
+      data[$(input).attr('name')] = $(input).val()
+    url = @el.attr 'action'
+    $.ajax
+      method: "POST"
+      data: data
+      url: url
+      error: (e)=>
+        console.log "error"
+        console.log e
+      success: =>
+        console.log "success"
+        @workshop.addClass('done')
+
 
   addErrors: (f)->
     $(f).parents('.form-group').addClass 'has-error'
@@ -74,6 +95,7 @@ class window.PictureUploader
     @originalWidth = $img.width()
     @originalHeight = $img.height()
     @loader.remove()
+    @submitBt.show()
     $img.appendTo @workzone
     @canvas.attr 'width', $img.width()
     @canvas.attr 'height', $img.height()
