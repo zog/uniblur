@@ -6,4 +6,9 @@ class PicturesController < ApplicationController
   def index
     redirect_to "/"
   end
+
+  def create
+    save_resource
+    render json: {status: 'success'}
+  end
 end

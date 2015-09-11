@@ -33,7 +33,6 @@ p
   background: white
   overflow: auto
 
-
 .side-border
   border-left: 30px solid $color-red
 
@@ -45,8 +44,24 @@ p
   border: none
   cursor: pointer
   display: inline-block
+  text-transform: uppercase
+  +transition(padding 0.3s)
   &.reset
     background-color: $color-blue
+  &:hover
+    text-decoration: none
+  &.loading
+    padding-left: 40px
+    +relative
+    &:after
+      +animation(fa-spin 2s infinite linear)
+      +absolute
+      left: 10px
+      top: 16px
+      content: "\f110"
+      font-family: FontAwesome
+      font-size: 25px
+
 
 header
   text-align: center
@@ -97,6 +112,7 @@ header
   .item
     width: 33.33%
     float: left
+    +relative
   .workshop-placeholder img
     margin: 0 auto
     width: 475px

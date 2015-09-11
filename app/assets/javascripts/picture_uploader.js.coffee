@@ -7,7 +7,7 @@ class window.PictureUploader
     @resetBt = @el.find(".reset")
     @resetBt.click =>
       @reset()
-    @submitBt = @el.find('input[type=submit]')
+    @submitBt = @el.find('a.submit')
     @submitBt.hide()
     @resetBt.hide()
     @imgUrlField.change =>
@@ -31,7 +31,7 @@ class window.PictureUploader
         $(@el.find('.picture_image label')[0]).trigger 'click'
       , 700
 
-    @el.on 'submit', (e) =>
+    @submitBt.click (e) =>
       @errors = false
       for f in @inputs
         unless $(f).val()
@@ -54,6 +54,7 @@ class window.PictureUploader
     for input in @el.find("input")
       data[$(input).attr('name')] = $(input).val()
     url = @el.attr 'action'
+    @submitBt.addClass 'loading'
     $.ajax
       method: "POST"
       data: data
@@ -64,7 +65,6 @@ class window.PictureUploader
       success: =>
         console.log "success"
         @workshop.addClass('done')
-
 
   addErrors: (f)->
     $(f).parents('.form-group').addClass 'has-error'

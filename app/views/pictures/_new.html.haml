@@ -8,7 +8,7 @@
 
       = f.input :email, placeholder: placeholder_for(resource, :email, f)
       = f.input :message, placeholder: placeholder_for(resource, :message, f)
-      = f.submit 'Send my image', class: 'button'
+      %a.button.submit Send my image
     .right
       = f.input :image
       = f.input :image_data, as: :hidden
