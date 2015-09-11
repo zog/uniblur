@@ -84,7 +84,7 @@ class window.PictureUploader
     @workzone = $('<div></div>')
     @workzone.addClass 'workzone workshop-working-container'
     @workzone.appendTo @el.find('.right')
-    @loader = $('<img class="loader" src="/assets/diamond-red.png"></canvas>')
+    @loader = $('<img class="loader" src="/assets/diamond-red.svg"></canvas>')
     @loader.appendTo @workzone
     @canvas = $('<canvas></canvas>')
     @canvas.appendTo @workzone
