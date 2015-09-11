@@ -148,8 +148,8 @@ class window.PictureUploader
 
   reset: =>
     @stage.removeChild @drawingCanvas
+    @stage.removeChild @drawingCanvasTmp
     @drawingCanvas = new createjs.Shape()
-    @stage.addChild @drawingCanvas
     @updateCacheImage(false)
     @resetBt.hide()
 
@@ -165,7 +165,6 @@ class window.PictureUploader
     @stage.addChild(@drawingCanvasTmp)
 
   handleMouseMove: (event)=>
-    console.log "handleMouseMove"
     @cursor.x = @stage.mouseX
     @cursor.y = @stage.mouseY
     if (!@isDrawing)
@@ -174,11 +173,11 @@ class window.PictureUploader
 
     midPoint = new createjs.Point(@oldPt.x + @stage.mouseX / @bitmap.scaleX >> 1, @oldPt.y + @stage.mouseY / @bitmap.scaleY >> 1)
     @drawingCanvas.graphics.setStrokeStyle(40 / @bitmap.scaleX, "round", "round")
-        .beginStroke("rgba(0,0,0,0.2)")
+        .beginStroke("rgba(0,0,0,0.5)")
         .moveTo(midPoint.x, midPoint.y)
         .curveTo(@oldPt.x, @oldPt.y, @oldMidPt.x, @oldMidPt.y)
     @drawingCanvasTmp.graphics.setStrokeStyle(40 / @bitmap.scaleX, "round", "round")
-        .beginStroke("rgba(0,0,0,0.2)")
+        .beginStroke("#02a9f4")
         .moveTo(midPoint.x, midPoint.y)
         .curveTo(@oldPt.x, @oldPt.y, @oldMidPt.x, @oldMidPt.y)
     @oldPt.x = @stage.mouseX / @bitmap.scaleX
@@ -191,9 +190,8 @@ class window.PictureUploader
     #   @updateCacheImage(true)
 
   handleMouseUp: (event)=>
-    console.log "handleMouseUp"
+    @stage.removeChild @drawingCanvasTmp
     @resetBt.show()
     @updateCacheImage(true)
     @isDrawing = false
-    @stage.removeChild @drawingCanvasTmp
 
