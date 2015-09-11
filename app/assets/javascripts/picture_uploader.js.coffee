@@ -21,10 +21,13 @@ class window.PictureUploader
     @startBt.click =>
       @startBt.addClass 'done'
       @workshop.addClass('active')
-      $(@el.find('.picture_image label')[0]).trigger 'click'
       $('.page').animate
         scrollTop: @el.offset().top
       , 1000
+      setTimeout =>
+        @startBt.remove()
+        $(@el.find('.picture_image label')[0]).trigger 'click'
+      , 700
 
     @el.on 'submit', (e) =>
       @errors = false

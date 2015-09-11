@@ -1,10 +1,11 @@
-%h2 Lorem ipsum dolor sit amet
-%p
-  Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
 
 = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
   %fieldset.inputs.panel-body
     .left
+      %h2 Lorem ipsum dolor sit amet
+      %p
+        Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+
       = f.input :email, placeholder: placeholder_for(resource, :email, f)
       = f.input :message, placeholder: placeholder_for(resource, :message, f)
       = f.submit 'Send my image', class: 'button'

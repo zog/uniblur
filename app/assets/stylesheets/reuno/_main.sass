@@ -55,11 +55,11 @@ header
     margin-top: 20px
 
 #start
-  +transition(background-color 0.3s)
+  +transition(opacity 0.3s)
   &:hover
     text-decoration: none
   &.done
-    background-color: #ccc
+    opacity: 0
 
 .form-container
   overflow: auto
@@ -86,8 +86,10 @@ header
     overflow: hidden
     +transition(transform 0.3s)
     +transform(translateX(0%))
-  &.active .inner
-    +transform(translateX(-50%))
+  &.active
+    min-height: 700px
+    .inner
+      +transform(translateX(-50%))
   .item
     width: 50%
     float: left
@@ -125,6 +127,7 @@ header
         position: absolute
         bottom: 0
         right: 0
+        z-index: 2
       input
         display: block
 
@@ -137,7 +140,9 @@ header
         top: 0
 
       .picture_image
+        padding: 0
         .controls
+          padding: 0
           border: none
           box-shadow: none
         .placeholder
