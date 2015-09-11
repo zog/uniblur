@@ -1,22 +1,35 @@
 !!!
-= cc_html lang: :fr, class: 'no-js' do
+/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="">
+/[if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="">
+/[if IE 8] <html class="no-js lt-ie9" lang="">
+/ [if gt IE 8]><!
+%html.no-js{:lang => ""}
+  / <![endif]
   %head
-    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=no", name: "viewport"}/
-    %meta{charset: "utf-8"}/
-
-    %title= content_for?(:title) ? yield(:title) : 'app_name'.t
-
-    %meta{name: "description", content: "#{content_for?(:description) ? yield(:description) : 'app_name'.t}"}/
-    = yield :meta
-
+    %meta{:charset => "utf-8"}/
+    %title Blur
+    %meta{:content => "TODO", :name => "description"}/
+    %meta{:content => "TODO", :name => "keywords"}/
+    %meta{:content => "TODO", :property => "og:title"}/
+    %meta{:content => "website", :property => "og:type"}/
+    %meta{:content => "TODO", :property => "og:url"}/
+    %meta{:content => "TODO", :property => "og:image"}/
+    %meta{:content => "TODO", :property => "og:description"}/
+    %meta{:content => "TODO", :property => "og:site_name"}/
+    %meta{:content => "summary", :name => "twitter:card"}/
+    %meta{:content => "@uniformmotion", :name => "twitter:site"}/
+    %meta{:content => "TODO", :name => "twitter:title"}/
+    %meta{:content => "TODO", :name => "twitter:description"}/
+    %meta{:content => "@uniformmotion", :name => "twitter:creator"}/
+    %meta{:content => "TODO", :name => "twitter:url"}/
+    %meta{:content => "TODO", :name => "twitter:image"}/
+    %meta{:content => "Uniform Motion", :name => "author"}/
+    %link{:href => "TODO", :rel => "author"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "black", :name => "apple-mobile-web-app-status-bar-style"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %link{href: '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', media: 'screen', rel: 'stylesheet'}
-
-    %meta{name: "apple-mobile-web-app-capable", content: "yes"}/
-    %meta{name: "mobile-web-app-capable", content: "yes"}/
-    %meta{name: "apple-mobile-web-app-status-bar-style", content: "black"}/
-
-    %link{ rel: "apple-touch-icon", href:"/images/apple-touch-icon.png"}/
-
+    %link{:href => "http://fonts.googleapis.com/css?family=Lato:400,300,700", :rel => "stylesheet", :type => "text/css"}/
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag 'application', media: 'all'
     = yield :styles
@@ -25,32 +38,32 @@
 
   - body_class = "#{yield :extra_body_class} #{controller_name} #{action_name}".strip
   %body{class: body_class}
-    %nav.navbar{role: :navigation}
-
-      .container-fluid
-        .navbar-header
-          %button.navbar-toggle{"data-target" => "#menu", "data-toggle" => "collapse", type: "button"}
-            %span.sr-only Toggle navigation
-            %i.fa.fa-navicon
-          %a.navbar-brand{href: "/"}
-            %span.text= 'app_name'.t
-
-    .scroll-wrapper
-      .inner-scroll-wrapper
-        - if content_for?(:content_header)
-          - content_header_class = yield :content_header_class
-          - content_header_style = yield :content_header_style
-          .content-header{class: content_header_class, style: content_header_style}
-            .container-fluid= yield :content_header
-
-        - if content_for?(:before_content)
-          .container-fluid= yield :before_content
-
-        - content_class = yield :extra_content_class
-        #content{class: content_class}
-          .container-fluid= yield
-
-
+  %body
+    /[if lt IE 8]
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    .page.side-border
+      %header
+        %img.logo{:alt => "Uniform Motion Logo", :src => "/assets/header-uniform-logo.png"}/
+      .form-container
+        .main-image
+        .content
+          %h1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          %p
+            Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+          %a#start.button{:href => "#"} SELECT AN IMAGE
+      .workshop
+        .inner
+          .workshop-placeholder.item
+            %img{:src => "/assets/diamond.png"}/
+          .item
+            .workshop-form-container= yield
+      %footer
+        Code by
+        %a{:href => "#"} @zog
+        + Design by
+        %a{:href => "http://www.moremountains.com"} @reuno
     <!--[if IE 8]>
     = javascript_include_tag 'shame'
     <![endif]-->
@@ -61,3 +74,11 @@
 
     = javascript_include_tag "application"
     = yield :scripts
+    / Google Analytics: change UA-XXXXX-X to be your site's ID.
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-2136357-14', 'auto');
+      ga('send', 'pageview');

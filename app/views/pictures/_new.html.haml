@@ -1,17 +1,24 @@
-.row
-  .col-md-12
-    = simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
-      %fieldset.inputs.panel-body
-        = inputs_for resource, f
-        = f.input :image_data, as: :hidden
-      .toolbar
-        %a.btn.btn-primary.reset{href: '#'}
-          = icon(:refresh)
-          %span.text= 'actions.reset'.t
+%h2 Lorem ipsum dolor sit amet
+%p
+  Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
 
-      = default_actions
+= simple_nested_form_for resource, url: controller.controller_namespace + [resource] do |f|
+  %fieldset.inputs.panel-body
+    .left
+      = f.input :email, placeholder: placeholder_for(resource, :email, f)
+      = f.input :message, placeholder: placeholder_for(resource, :message, f)
+      = f.submit 'Send my image', class: 'button'
+    .right
+      = f.input :image
+      = f.input :image_data, as: :hidden
+      %a.button.reset{href: '#'}
+        = icon(:refresh)
+        %span.text= 'actions.reset'.t
 
-    = render 'direct_download'
+
+
+
+= render 'direct_download'
 
 - content_for(:scripts) do
   :coffee

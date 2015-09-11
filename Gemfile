@@ -61,6 +61,8 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+  gem 'guard-livereload', '1.0.3'
+  # gem 'listen', '1.3.0'
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'

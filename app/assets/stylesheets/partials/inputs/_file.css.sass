@@ -22,11 +22,32 @@
       +absolute(0,0,0,0)
 
   .progress
-    height: 4px
-    +absolute(0,0,initial,0)
+    height: 400px
+    background-image: url(/assets/diamond.png)
+    background-size: auto 400px
+    background-position: 50% 50%
+    background-repeat: no-repeat
+    background-color: transparent !important
+    border: none
+    box-shadow: none
+    +relative
+  .progress-bar
+    +absolute()
+    box-shadow: none
+    bottom: 0
+    left: 0
+    right: 0
+    height: 0
+    +transition(height 0.1s)
+    width: 100% !important
+    background-color: transparent !important
+    background-image: url(/assets/diamond-red.png)
+    background-size: auto 400px
+    background-position: 50% 100%
+    background-repeat: no-repeat
 
   .preview
-    min-height: 21px
+    min-height: 400px
     overflow: hidden
     img
       margin: 0

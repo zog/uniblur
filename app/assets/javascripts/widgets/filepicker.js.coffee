@@ -79,7 +79,7 @@ widgets.define 'filepicker', (element, options) ->
         # This is what makes everything really cool, thanks to that callback
         # you can now update the progress bar based on the upload progress
         percent = Math.round((e.loaded / e.total) * 100)
-        preview.find('.progress-bar').css('width', percent + '%')
+        preview.find('.progress-bar').css('height', percent + '%')
 
       fail: (e, data) ->
         console.log('fail')
@@ -130,7 +130,7 @@ widgets.define 'filepicker', (element, options) ->
 
       done: (event, data) ->
         preview.find('.progress').fadeOut 300, ->
-          preview.find('.progress-bar').css('width', 0)
+          preview.find('.progress-bar').css('height', 0)
 
   else
     $input = $element.find('input').show()

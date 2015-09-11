@@ -1,9 +1,17 @@
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors[attribute] << (options[:message] || "Email incorrect")
+    end
+  end
+end
+
 class Picture < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   attr_accessor :image_data
 
-  validates :name, :image, presence: true
+  validates :email, presence: true, email: true
 
   before_validation :convert_data_uri_to_upload
 

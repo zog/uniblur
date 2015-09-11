@@ -1,0 +1,175 @@
+html,body
+  height: 100%
+
+body
+  background: white
+  font-family: $font-sans-serif
+  font-weight: 300
+
+div, p,input,textarea
+  box-sizing: border-box
+
+h1,h2
+  color: $color-red
+  font-family: $font-sans-serif
+  font-weight: 300
+  text-transform: uppercase
+  font-size: 26px
+  line-height: 36px
+  margin: 0
+p
+  font-family: $font-sans-serif
+  color: $color-grey
+  font-weight: 300
+  margin-top: 40px
+  margin-bottom: 40px
+
+.page
+  width: 100%
+  height: 100%
+  background-color: blue
+  box-sizing: border-box
+  margin: 0 auto
+  background: white
+  overflow: auto
+
+
+.side-border
+  border-left: 30px solid $color-red
+
+.button
+  background-color: $color-red
+  padding: 15px
+  color: white
+  text-decoration: none
+  border: none
+  cursor: pointer
+  display: inline-block
+  &.reset
+    background-color: $color-blue
+
+header
+  text-align: center
+  height: 60px
+  img.logo
+    margin-top: 20px
+
+#start
+  +transition(background-color 0.3s)
+  &:hover
+    text-decoration: none
+  &.done
+    background-color: #ccc
+
+.form-container
+  overflow: auto
+  background-color: $color-light-grey
+  display: flex
+  .main-image
+    background-image: url(/assets/form-side.png)
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    min-height: 300px
+    flex: 0.7
+  .content
+    flex: 0.3
+    padding: 60px
+
+.workshop
+  max-width: 1000px
+  margin: 60px auto
+  overflow: hidden
+
+  .inner
+    width: 200%
+    overflow: hidden
+    +transition(transform 0.3s)
+    +transform(translateX(0%))
+  &.active .inner
+    +transform(translateX(-50%))
+  .item
+    width: 50%
+    float: left
+  .workshop-placeholder img
+    margin: 0 auto
+    width: 475px
+    max-width: 80%
+    display: block
+    margin-top: 60px
+  .workshop-working-container
+    width: 100%
+    float: left
+    max-height: 500px
+    // background-color: #444
+    img, canvas
+      margin: auto
+    img
+      display: block
+      max-height: 500px
+      max-width: 100%
+
+  .workshop-form-container
+    padding-right: 60px
+    form
+      label
+        display: none
+      .left
+        width: 30%
+        float: left
+        padding-right: 30px
+      .right
+        width: 70%
+        float: left
+      .reset
+        position: absolute
+        bottom: 0
+        right: 0
+      input
+        display: block
+
+      input[type=text],textarea
+        border: 1px solid $color-grey
+        padding: 10px
+        width: 100%
+
+      .form-control-feedback
+        top: 0
+
+      .picture_image
+        .controls
+          border: none
+          box-shadow: none
+        .placeholder
+          display: none
+.workshop-thanks
+  width: 50%
+  margin: 0 auto
+  margin-top: 60px
+
+footer
+  color: $color-grey
+  text-align: center
+  padding-bottom: 60px
+  text-transform: uppercase
+  a
+    color: $color-grey
+    text-decoration: none
+    &:hover
+      color: black
+
+
+@media only screen and (max-width: 767px)
+  .form-container
+    flex-direction: column
+    .main-image,.content
+      flex: 1
+@media only screen and (max-width: 999px)
+  .workshop
+    flex-direction: column-reverse
+    .workshop-form-container,.workshop-working-container
+      flex: 1
+      padding-left: 10%
+      padding-right: 10%
+    .workshop-working-container
+      margin-bottom: 60px

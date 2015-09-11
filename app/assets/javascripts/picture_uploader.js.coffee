@@ -1,6 +1,8 @@
 class window.PictureUploader
   constructor: (el)->
     @el = $(el)
+    @workshop = $(".workshop")
+    @startBt = $('#start')
     @imgUrlField = @el.find('[name="picture[remote_image_url]"]')
     @resetBt = @el.find(".btn.reset")
     @resetBt.click =>
@@ -9,14 +11,20 @@ class window.PictureUploader
     @imgUrlField.change =>
       @updateImage()
 
-    # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F80258f01-85d1-44ec-84aa-16d9fd862c9e%2Fzog.jpg').trigger 'change'
-    # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F8f1d7e98-4ac9-4413-a35a-218ca959f504%2Fmasque_affiche_portrait.jpg').trigger 'change'
     @inputs = @el.find('input.required, input[name*="remote_image_url"]')
     @inputs.on "change", (e)=>
       if $(e.target).val()?
         @removeErrors e.target
       else
         @addErrors e.target
+
+    @startBt.click =>
+      @startBt.addClass 'done'
+      @workshop.addClass('active')
+      $(@el.find('.picture_image label')[0]).trigger 'click'
+      $('.page').animate
+        scrollTop: @el.offset().top
+      , 1000
 
     @el.on 'submit', (e) =>
       @errors = false
@@ -30,13 +38,16 @@ class window.PictureUploader
       @stage.update()
       @el.find('[name*=image_data]').val @stage.toDataURL()
       @el.find('[name*=remote_image_url]').remove()
+    # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F80258f01-85d1-44ec-84aa-16d9fd862c9e%2Fzog.jpg').trigger 'change'
+    # @imgUrlField.val('http://uniblur.s3-eu-west-1.amazonaws.com/uploads%2F8f1d7e98-4ac9-4413-a35a-218ca959f504%2Fmasque_affiche_portrait.jpg').trigger 'change'
+    # @startBt.click()
 
   addErrors: (f)->
     $(f).parents('.form-group').addClass 'has-error'
     parent = $(f).parent()
     feedback = $('<span class="form-control-feedback"><i class="fa fa-times"></i> </span>')
     feedback.appendTo parent
-    alert = $('<span class="alert alert-danger">Ce champ est obligatoire / This field is mandatory</span>')
+    alert = $('<span class="alert alert-danger">This field is mandatory</span>')
     alert.appendTo parent
 
   removeErrors: (f)->
@@ -47,8 +58,10 @@ class window.PictureUploader
   buildWorkzone: =>
     return if @workzone?
     @workzone = $('<div></div>')
-    @workzone.addClass 'workzone'
-    @workzone.appendTo @el
+    @workzone.addClass 'workzone workshop-working-container'
+    @workzone.appendTo @el.find('.right')
+    @loader = $('<img class="loader" src="/assets/diamond-red.png"></canvas>')
+    @loader.appendTo @workzone
     @canvas = $('<canvas></canvas>')
     @canvas.appendTo @workzone
 
@@ -57,6 +70,7 @@ class window.PictureUploader
     $img.appendTo $("body")
     @originalWidth = $img.width()
     @originalHeight = $img.height()
+    @loader.remove()
     $img.appendTo @workzone
     @canvas.attr 'width', $img.width()
     @canvas.attr 'height', $img.height()
@@ -99,7 +113,7 @@ class window.PictureUploader
     @stage.update()
 
   updateImage: =>
-    # @el.find('.picture_image').hide()
+    @el.find('.picture_image').hide()
     @buildWorkzone()
     if @img?
       $(@img).remove()
